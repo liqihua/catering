@@ -58,7 +58,6 @@
     height: 100%;
     width: 5rem;
     font-size: 0.6rem;
-    color: rgb(102, 102, 102);
     background-color: rgb(245, 245, 245);
 }
 
@@ -66,6 +65,8 @@
     display: block;
     height: 3rem;
     width: 5rem;
+    color: rgb(102, 102, 102);
+    text-decoration: none;
 }
 
 .menu-nav div {
@@ -87,6 +88,9 @@
     height: 100%;
     flex: 1;
     overflow: scroll;
+}
+
+.menu-product-wrap {
     padding: 0 0.5rem 0 0.8rem;
 }
 

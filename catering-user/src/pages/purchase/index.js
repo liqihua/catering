@@ -136,73 +136,88 @@ class Purchase extends React.Component {
                             })
                         }
                     </nav>
-                    <div className='menu-product'>
-                    {
-                        this.state.categoryList.map( (category,categoryIndex) => {
-                            return (
-                                <div className='product-list' key={categoryIndex}>
-                                    <dl>
-                                        <dt>{category.categoryName}</dt>
-                                        {
-                                            category.productList.map( (product,productIndex) => {
-                                                var productImg = null;
-                                                const imgIndex = productIndex % 4
-                                                if(imgIndex === 0) {
-                                                    productImg = imgProductPicture1;
-                                                } else if(imgIndex === 1) {
-                                                    productImg = imgProductPicture2;
-                                                } else if(imgIndex === 2) {
-                                                    productImg = imgProductPicture3;
-                                                } else if(imgIndex === 3) {
-                                                    productImg = imgProductPicture4;
-                                                }
-                                                return (
-                                                    <dd key={productIndex}>
-                                                        <div className='product-picture'>
-                                                            <img src={productImg} alt=''/>
-                                                        </div>
-                                                        <div className='product-content' ref='productContent'>
-                                                            <div className='product-title'>{product.title}</div>
-                                                            <div className='product-intro' ref='productIntro'>{product.intro}</div>
-                                                            <div className='product-content-footer'>
-                                                                <div className='product-price'>￥{product.price}</div>
-                                                                <div className='product-opt'>
-                                                                    <div className='product-opt-item'><img src={imgBtnSub} alt=''/></div>
-                                                                    <div className='product-opt-item'><span>2</span></div>
-                                                                    <div className='product-opt-item'><img src={imgBtnAdd} alt=''/></div>
-                                                                </div>
-                                                                {/* <div className='product-standards'><span>选规格</span></div> */}
+                    <div className='menu-product' ref='productContainer' onScrollCapture={this.handleProductScroll.bind(this)}>
+                        <div className='menu-product-wrap' ref='productWrap'>
+                        {
+                            this.state.categoryList.map( (category,categoryIndex) => {
+                                return (
+                                    <div className='product-list' key={categoryIndex}>
+                                        <dl>
+                                            <dt>{category.categoryName}</dt>
+                                            {
+                                                category.productList.map( (product,productIndex) => {
+                                                    var productImg = null;
+                                                    const imgIndex = productIndex % 4
+                                                    if(imgIndex === 0) {
+                                                        productImg = imgProductPicture1;
+                                                    } else if(imgIndex === 1) {
+                                                        productImg = imgProductPicture2;
+                                                    } else if(imgIndex === 2) {
+                                                        productImg = imgProductPicture3;
+                                                    } else if(imgIndex === 3) {
+                                                        productImg = imgProductPicture4;
+                                                    }
+                                                    return (
+                                                        <dd key={productIndex}>
+                                                            <div className='product-picture'>
+                                                                <img src={productImg} alt=''/>
                                                             </div>
-                                                        </div>
-                                                    </dd>
-                                                )
-                                            })
-                                        }
-                                    </dl>
-                                </div>
-                            )
-                        })
-                    }
+                                                            <div className='product-content'>
+                                                                <div className='product-title'>{product.title}</div>
+                                                                <div className='product-intro'>{product.intro}</div>
+                                                                <div className='product-content-footer'>
+                                                                    <div className='product-price'>￥{product.price}</div>
+                                                                    <div className='product-opt'>
+                                                                        <div className='product-opt-item'><img src={imgBtnSub} alt=''/></div>
+                                                                        <div className='product-opt-item'><span>2</span></div>
+                                                                        <div className='product-opt-item'><img src={imgBtnAdd} alt=''/></div>
+                                                                    </div>
+                                                                    {/* <div className='product-standards'><span>选规格</span></div> */}
+                                                                </div>
+                                                            </div>
+                                                        </dd>
+                                                    )
+                                                })
+                                            }
+                                        </dl>
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
                     </div>
                 </div>
-                {/* <div className='cart'>cart</div> */}
             </div>
         );
     }
 
     componentDidMount() {
-        window.addEventListener('resize',this.handleResize.bind(this))
+        window.addEventListener('scroll',this.handleScroll.bind(this))
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize',this.handleResize.bind(this))
+        window.removeEventListener('scroll',this.handleScroll.bind(this))
     }
 
-    handleResize = (e) => {
-        console.log(this.refs.productContent.clientWidth)
-        this.refs.productIntro.style.width=this.refs.productContent.clientWidth+'px'
-        console.log(this.refs.productIntro.style.width);
-        
+    handleScroll = (e) => {
+        //console.log(e)
+    }
+
+    handleProductScroll = (e) => {
+        console.log('productWrap offsetHeight:' + this.refs.productWrap.offsetHeight)
+        console.log('productWrap offsetTop:' + this.refs.productWrap.offsetTop)
+        console.log('productWrap clientHeight:' + this.refs.productWrap.clientHeight)
+        console.log('productWrap clientTop:' + this.refs.productWrap.clientTop)
+        console.log('productWrap scrollHeight:' + this.refs.productWrap.scrollHeight)
+        console.log('productWrap scrollTop:' + this.refs.productWrap.scrollTop)
+
+        console.log('productContainer offsetHeight:' + this.refs.productContainer.offsetHeight)
+        console.log('productContainer offsetTop:' + this.refs.productWrap.offsetTop)
+        console.log('productContainer clientHeight:' + this.refs.productWrap.clientHeight)
+        console.log('productContainer clientTop:' + this.refs.productWrap.clientTop)
+        console.log('productContainer scrollHeight:' + this.refs.productWrap.scrollHeight)
+        console.log('productContainer scrollTop:' + this.refs.productWrap.scrollTop)
+        console.log('----------------')
     }
     
 }
